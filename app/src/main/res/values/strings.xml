@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Capstone-Project</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- For Admob -->
+    <string name="banner_ad_unit_id">ca-app-pub-3819034797358925/1880338053</string>
 </resources>
