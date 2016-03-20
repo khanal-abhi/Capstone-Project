@@ -1,10 +1,11 @@
 package co.khanal.capstone_project.utililty;
 
 import android.content.Context;
-import android.widget.ScrollView;
+import android.provider.MediaStore;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class ScriptUtility {
         List<File> files = Arrays.asList(dir);
         List<File> scripts = new ArrayList<>();
 
-        for(File file : files){
+        for(File file : dir.listFiles()){
             if(file.isFile()){
                 if(file.toString().contains(".txt")){
                     scripts.add(file);
@@ -32,7 +33,7 @@ public class ScriptUtility {
     }
 
 //    Static method that return a Script object from file, provided it is a .txt file.
-    public static Script fromFile(File file) throws IOException{
+    public static Script scriptFromFile(File file) throws IOException{
         Script script = null;
         if(file.isFile()){
             if(file.toString().contains(".txt")){
@@ -42,9 +43,60 @@ public class ScriptUtility {
                 while((data = fileInputStream.read()) != -1){
                     buffer.append((char)data);
                 }
-                script = new Script(file.toString(), buffer.toString());
+                script = new Script(improperFilename(file.getName()), buffer.toString());
             }
         }
         return script;
+    }
+
+//    Static method to save a script to file.
+    public static File scriptToFile(Script script, Context context) throws IOException{
+        if(script != null){
+            File file = new File((context.getFilesDir().getPath()).toString() + "/" + properFilename(script.getFileName()));
+            FileOutputStream outputStream = new FileOutputStream(file);
+            StringBuffer buffer = new StringBuffer();
+            for(int i = 0; i < script.getContent().length(); i++){
+                outputStream.write(script.getContent().charAt(i));
+            }
+            return file;
+        }
+        return null;
+    }
+
+//    Static file to convert blank spaces to '_'.
+    public static String properFilename(String filename){
+        if(filename.length() == 0)
+            return null;
+        StringBuffer buffer = new StringBuffer();
+        for(int i = 0; i < filename.length(); i++){
+            char c = filename.charAt(i);
+            if(c == ' '){
+                c = '_';
+            }
+            buffer.append(c);
+        }
+        return buffer.toString() + ".txt";
+    }
+
+
+//     Static file to convert blank spaces to '_'.
+    public static String improperFilename(String filename){
+        if(filename.length() == 0)
+            return null;
+        StringBuffer buffer = new StringBuffer();
+        for(int i = 0; i < filename.length(); i++){
+            char c = filename.charAt(i);
+            if(c == '_'){
+                c = ' ';
+            }
+            buffer.append(c);
+        }
+        String result = buffer.toString();
+        return result.replace(".txt", "");
+    }
+
+    public static boolean deleteScript(Script script, Context context){
+        File file = new File((context.getFilesDir().getPath()).toString() + "/" + properFilename(script.getFileName()));
+        return file.delete();
     }
 }

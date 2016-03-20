@@ -17,10 +17,32 @@ public class Script {
         this.content = content;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Script)) return false;
+
+        Script script = (Script) o;
+
+        if (getId() != script.getId()) return false;
+        if (!getFileName().equals(script.getFileName())) return false;
+        return getContent().equals(script.getContent());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + getFileName().hashCode();
+        result = 31 * result + getContent().hashCode();
+        return result;
+    }
+
     public Script(long id, String fileName, String content) {
         this.id = id;
         this.fileName = fileName;
         this.content = content;
+
     }
 
     public long getId() {
