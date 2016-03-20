@@ -15,13 +15,8 @@ import java.util.List;
  */
 public class ScriptUtility {
 
-    private Context context;
-
-    public ScriptUtility(Context context) {
-        this.context = context;
-    }
-
-    public List<File> getFiles(){
+//    Static method that returns a list of all files with .txt extension in the app directory.
+    public static List<File> getFiles(Context context){
         File dir = context.getFilesDir();
         List<File> files = Arrays.asList(dir);
         List<File> scripts = new ArrayList<>();
@@ -36,7 +31,8 @@ public class ScriptUtility {
         return scripts;
     }
 
-    public Script fromFile(File file) throws IOException{
+//    Static method that return a Script object from file, provided it is a .txt file.
+    public static Script fromFile(File file) throws IOException{
         Script script = null;
         if(file.isFile()){
             if(file.toString().contains(".txt")){
