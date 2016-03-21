@@ -40,14 +40,15 @@ public class MainActivity extends AppCompatActivity {
         new LoadScripts().execute();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if(fab != null)
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), AddScript.class);
-                startActivityForResult(intent, ADD_SCRIPT_REQUEST);
-            }
-        });
+                    Intent intent = new Intent(getApplicationContext(), AddScript.class);
+                    startActivityForResult(intent, ADD_SCRIPT_REQUEST);
+                }
+            });
 
 
     }

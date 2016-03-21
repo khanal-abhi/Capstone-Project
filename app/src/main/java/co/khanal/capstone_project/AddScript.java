@@ -1,12 +1,15 @@
 package co.khanal.capstone_project;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -21,39 +24,57 @@ import co.khanal.capstone_project.utililty.Script;
 public class AddScript extends AppCompatActivity {
 
     Script script;
+    CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator_layout);
+
         setContentView(R.layout.activity_add_script);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Picasso.with(getApplicationContext())
                 .load(R.drawable.add_script_backdrop)
-                .placeholder(R.drawable.backdrop)
+                .placeholder(R.drawable.add_script_backdrop)
                 .error(R.drawable.backdrop)
                 .into((ImageView) findViewById(R.id.backdrop));
 
-        ((FloatingActionButton)findViewById(R.id.save_script)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String filename = ((TextView)findViewById(R.id.title)).getText().toString();
-                filename = filename.trim();
-                String content = ((TextView)findViewById(R.id.content)).getText().toString();
-                script = new Script(
-                        filename,
-                        content
-                );
-                new SaveQuery().execute(script);
-                Intent intent = new Intent();
-                intent.putExtra(Script.KEY, script);
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        });
+        FloatingActionButton fab = ((FloatingActionButton) findViewById(R.id.save_script));
+
+        if(fab != null){
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String filename = ((TextView) findViewById(R.id.title)).getText().toString();
+                    filename = filename.trim();
+                    String content = ((TextView) findViewById(R.id.content)).getText().toString();
+                    script = new Script(
+                            filename,
+                            content
+                    );
+                    Intent intent = new Intent();
+
+                    if (filename.length() > 0) {
+                        if (content.trim().length() > 0) {
+                            new SaveQuery().execute(script);
+                            intent.putExtra(Script.KEY, script);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        } else {
+                            Snackbar.make(v.getRootView().findViewById(R.id.coordinator_layout), getString(R.string.script_save_no_content), Snackbar.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Snackbar.make(v.getRootView().findViewById(R.id.coordinator_layout), getString(R.string.script_save_no_filename), Snackbar.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+        }
     }
 
     public class SaveQuery extends AsyncTask<Script, Void, Void>{

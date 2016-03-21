@@ -16,4 +16,6 @@
     <string name="script_deleted">The script has been deleted successfully.</string>
     <string name="delete">DELETE</string>
     <string name="question_delete_script">Delete the script?</string>
+    <string name="script_save_no_filename">Cannot add a script with no title.</string>
+    <string name="script_save_no_content">Cannot add a script with no content.</string>
 </resources>

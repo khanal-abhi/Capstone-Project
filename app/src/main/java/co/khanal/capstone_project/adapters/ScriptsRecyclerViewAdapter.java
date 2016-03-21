@@ -68,7 +68,6 @@ public class ScriptsRecyclerViewAdapter
                 subtitle = script.getContent().substring(0, 50);
             } catch (StringIndexOutOfBoundsException e){
                 subtitle = script.getContent();
-            } finally {
                 subtitle += itemView.getContext().getString(R.string.ellipsis);
             }
             this.subtitle.setText(subtitle);
