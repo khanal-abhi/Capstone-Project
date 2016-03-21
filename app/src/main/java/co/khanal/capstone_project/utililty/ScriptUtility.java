@@ -84,7 +84,7 @@ public class ScriptUtility {
     }
 
 
-//     Static file to convert blank spaces to '_'.
+//     Static file to convert '_' to blank spaces.
     public static String improperFilename(String filename){
         if(filename.length() == 0)
             return null;
