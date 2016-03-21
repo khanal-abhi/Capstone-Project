@@ -20,11 +20,7 @@
                 app:title="@string/app_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleMarginStart="48dp"
-                app:expandedTitleMarginEnd="64dp">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -37,12 +33,12 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <ListView
-            android:id="@+id/listview"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_below="@id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent"
+            />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

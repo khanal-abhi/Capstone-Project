@@ -5,18 +5,20 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import co.khanal.capstone_project.adapters.ScriptAdapter;
+import co.khanal.capstone_project.adapters.ScriptsRecyclerViewAdapter;
 import co.khanal.capstone_project.utililty.Script;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,31 +28,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
         setSupportActionBar(toolbar);
 
-        Script[] scripts = new Script[]{
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh "),
-                new Script("hello world", "lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh, lorem ipsum, blah blah blah blah balh blah balh blah blah blah blah balh blah balh ")
+        final List<Script> scripts = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            scripts.add(new Script(getString(R.string.placeholder_title) + String.valueOf(i), getString(R.string.placeholder_subtitle)));
+        }
 
-        };
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
 
-        ListView listView = (ListView)findViewById(R.id.listview);
-        ScriptAdapter adapter = new ScriptAdapter(getApplicationContext(), R.layout.individual_script, scripts);
-        listView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+        recyclerView.setAdapter(new ScriptsRecyclerViewAdapter(scripts));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                View childView = rv.findChildViewUnder(e.getX(), e.getY());
+                if(childView != null){
+                    int position = rv.getChildAdapterPosition(childView);
+                    Toast.makeText(getApplicationContext(), scripts.get(position).getFileName(), Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        collapsingToolbarLayout.setTitle(getString(R.string.app_name));
 
     }
 
