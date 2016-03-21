@@ -13,24 +13,16 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="192dp">
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
 
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsing"
-                app:title="@string/app_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"
-                    app:layout_collapseMode="pin"/>
-
-            </android.support.design.widget.CollapsingToolbarLayout>
-
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:title="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:layout_collapseMode="pin"/>
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -39,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
+
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

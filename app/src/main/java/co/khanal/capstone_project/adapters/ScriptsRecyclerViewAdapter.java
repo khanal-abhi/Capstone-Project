@@ -17,13 +17,15 @@ import co.khanal.capstone_project.utililty.Script;
  * Created by abhi on 3/21/16.
  */
 public class ScriptsRecyclerViewAdapter
-        extends RecyclerView.Adapter<ScriptsRecyclerViewAdapter.ScriptViewHolder>{
+        extends RecyclerView.Adapter<ScriptsRecyclerViewAdapter.ScriptViewHolder> {
 
     List<Script> scripts;
     Context context;
+    OnItemClickListener listener;
 
-    public ScriptsRecyclerViewAdapter(List<Script> scripts){
+    public ScriptsRecyclerViewAdapter(List<Script> scripts, OnItemClickListener listener){
         this.scripts = scripts;
+        this.listener = listener;
     }
 
     @Override
@@ -35,22 +37,14 @@ public class ScriptsRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(ScriptViewHolder holder, int position) {
-        holder.title.setText(scripts.get(position).getFileName());
-        String subtitle = "";
-        try {
-            subtitle = scripts.get(position).getContent().substring(0, 50);
-        } catch (ArrayIndexOutOfBoundsException e){
-            subtitle = scripts.get(position).getContent();
-        } finally {
-            subtitle += context.getString(R.string.ellipsis);
-        }
-        holder.subtitle.setText(subtitle);
+        holder.bind(scripts.get(position), listener);
     }
 
     @Override
     public int getItemCount() {
         return scripts.size();
     }
+
 
     public static class ScriptViewHolder extends RecyclerView.ViewHolder{
 
@@ -64,5 +58,28 @@ public class ScriptsRecyclerViewAdapter
             subtitle = (TextView)itemView.findViewById(R.id.subtitle);
             scriptCard = (CardView)itemView.findViewById(R.id.script_card);
         }
+
+        public void bind(final Script script, final OnItemClickListener listener){
+            title.setText(script.getFileName());
+            String subtitle = "";
+            try {
+                subtitle = script.getContent().substring(0, 50);
+            } catch (ArrayIndexOutOfBoundsException e){
+                subtitle = script.getContent();
+            } finally {
+                subtitle += itemView.getContext().getString(R.string.ellipsis);
+            }
+            this.subtitle.setText(subtitle);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(script);
+                }
+            });
+        }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(Script script);
     }
 }

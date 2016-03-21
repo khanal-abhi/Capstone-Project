@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ScrollingTabContainerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         final List<Script> scripts = new ArrayList<>();
         for(int i = 0; i < 10; i++){
             scripts.add(new Script(getString(R.string.placeholder_title) + String.valueOf(i), getString(R.string.placeholder_subtitle)));
@@ -37,31 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-        recyclerView.setAdapter(new ScriptsRecyclerViewAdapter(scripts));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(new ScriptsRecyclerViewAdapter(scripts, new ScriptsRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Script script) {
+                Toast.makeText(getApplicationContext(), script.getFileName(), Toast.LENGTH_SHORT).show();
+            }
+        }));
         recyclerView.setHasFixedSize(true);
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                View childView = rv.findChildViewUnder(e.getX(), e.getY());
-                if(childView != null){
-                    int position = rv.getChildAdapterPosition(childView);
-                    Toast.makeText(getApplicationContext(), scripts.get(position).getFileName(), Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
