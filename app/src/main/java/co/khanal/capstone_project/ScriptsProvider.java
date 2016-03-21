@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.widget.Switch;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 import co.khanal.capstone_project.utililty.Script;
@@ -27,6 +28,8 @@ public class ScriptsProvider extends ContentProvider {
     public static final int ID_INDEX = 0;
     public static final int FILENAME_INDEX = 1;
     public static final int CONTENT_INDEX = 2;
+
+    public static final Uri SCRIPT_PROVIDER_URI = Uri.parse("content://co.khanal.capstone_project.scripts");
 
     public ScriptsProvider() {
     }

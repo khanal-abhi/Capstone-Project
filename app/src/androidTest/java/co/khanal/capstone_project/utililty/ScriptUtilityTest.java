@@ -14,6 +14,7 @@ public class ScriptUtilityTest extends AndroidTestCase {
 
     public void setUp() throws Exception {
         super.setUp();
+        ScriptUtility.deleteAllScripts(getContext());
         script = new Script("hello world", "some data goes here.");
         script.setId(1);
 
@@ -48,7 +49,6 @@ public class ScriptUtilityTest extends AndroidTestCase {
         ScriptUtility.scriptToFile(script, getContext());
         assertEquals(script.getContent(), ScriptUtility.getScripts(getContext()).get(0).getContent());
         assertEquals(script.getFileName(), ScriptUtility.getScripts(getContext()).get(0).getFileName());
-        assertEquals(script.getId(), ScriptUtility.getScripts(getContext()).get(0).getId());
     }
 
     public void testProperFilename() throws Exception {
@@ -63,5 +63,12 @@ public class ScriptUtilityTest extends AndroidTestCase {
         ScriptUtility.scriptToFile(script, getContext());
         ScriptUtility.deleteAllScripts(getContext());
         assertEquals(0, ScriptUtility.getScripts(getContext()).size());
+    }
+
+    public void testListMultipleFiles() throws Exception{
+        ScriptUtility.scriptToFile(script, getContext());
+        script.setFileName("another file");
+        ScriptUtility.scriptToFile(script, getContext());
+        assertEquals(2, ScriptUtility.getScripts(getContext()).size());
     }
 }

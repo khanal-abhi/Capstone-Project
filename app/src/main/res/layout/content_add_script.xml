@@ -8,10 +8,46 @@
     tools:context=".AddScript"
     tools:showIn="@layout/activity_add_script">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:padding="@dimen/text_margin">
+
+        <TextView
+            android:id="@+id/title_label"
+            android:text="@string/placeholder_title"
+            style="@style/script_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_below="@id/title_label"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_margin" />
+
+        <TextView
+            android:id="@+id/content_label"
+            android:layout_below="@id/title"
+            android:text="@string/placeholder_subtitle"
+            style="@style/script_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_below="@id/content_label"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+
 
 </android.support.v4.widget.NestedScrollView>
+

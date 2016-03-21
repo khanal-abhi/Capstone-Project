@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 
 import co.khanal.capstone_project.utililty.Script;
+import co.khanal.capstone_project.utililty.ScriptUtility;
 
 /**
  * Created by abhi on 3/20/16.
@@ -16,6 +17,7 @@ public class ScriptsProviderTest extends ApplicationTest {
 
     public void setUp() throws Exception {
         super.setUp();
+        ScriptUtility.deleteAllScripts(getContext());
         script = new Script(1, "some data", "Here goes some content just for testing purposes.");
         uri = Uri.parse("content://co.khanal.capstone_project.scripts/");
     }
@@ -115,5 +117,21 @@ public class ScriptsProviderTest extends ApplicationTest {
 
         assertEquals(this.script.getContent()+ " :new", script1.getContent());
 
+    }
+
+    public void testMultipleFiles() throws Exception {
+        ScriptUtility.scriptToFile(script, getContext());
+        script.setFileName("asdaskdkasd");
+        ScriptUtility.scriptToFile(script, getContext());
+
+        Cursor cursor = getContext().getContentResolver().query(
+                uri,
+                null,
+                null,
+                null,
+                null
+        );
+
+        assertEquals(2, cursor.getCount());
     }
 }

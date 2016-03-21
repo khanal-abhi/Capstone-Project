@@ -21,11 +21,13 @@ public class ScriptsRecyclerViewAdapter
 
     List<Script> scripts;
     Context context;
-    OnItemClickListener listener;
+    OnItemClickListener clickListener;
+    OnItemLongClickListener longClickListener;
 
-    public ScriptsRecyclerViewAdapter(List<Script> scripts, OnItemClickListener listener){
+    public ScriptsRecyclerViewAdapter(List<Script> scripts, OnItemClickListener clickListener, OnItemLongClickListener longClickListener){
         this.scripts = scripts;
-        this.listener = listener;
+        this.clickListener = clickListener;
+        this.longClickListener = longClickListener;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class ScriptsRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(ScriptViewHolder holder, int position) {
-        holder.bind(scripts.get(position), listener);
+        holder.bind(scripts.get(position), clickListener, longClickListener);
     }
 
     @Override
@@ -59,12 +61,12 @@ public class ScriptsRecyclerViewAdapter
             scriptCard = (CardView)itemView.findViewById(R.id.script_card);
         }
 
-        public void bind(final Script script, final OnItemClickListener listener){
+        public void bind(final Script script, final OnItemClickListener clickListener, final OnItemLongClickListener longClickListener){
             title.setText(script.getFileName());
             String subtitle = "";
             try {
                 subtitle = script.getContent().substring(0, 50);
-            } catch (ArrayIndexOutOfBoundsException e){
+            } catch (StringIndexOutOfBoundsException e){
                 subtitle = script.getContent();
             } finally {
                 subtitle += itemView.getContext().getString(R.string.ellipsis);
@@ -73,7 +75,13 @@ public class ScriptsRecyclerViewAdapter
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(script);
+                    clickListener.onItemClick(script);
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return longClickListener.onItemLongClick(script);
                 }
             });
         }
@@ -81,5 +89,9 @@ public class ScriptsRecyclerViewAdapter
 
     public interface OnItemClickListener{
         void onItemClick(Script script);
+    }
+
+    public interface OnItemLongClickListener{
+        boolean onItemLongClick(Script script);
     }
 }

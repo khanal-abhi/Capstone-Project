@@ -25,7 +25,7 @@
             android:name=".ScriptsProvider"
             android:authorities="co.khanal.capstone_project.scripts"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
         <activity
             android:name=".AddScript"

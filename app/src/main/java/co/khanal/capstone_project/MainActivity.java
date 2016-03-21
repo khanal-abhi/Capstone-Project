@@ -1,8 +1,12 @@
 package co.khanal.capstone_project;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +24,10 @@ import co.khanal.capstone_project.utililty.Script;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int ADD_SCRIPT_REQUEST = 0;
+
+    CoordinatorLayout coordinatorLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,21 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        final List<Script> scripts = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-            scripts.add(new Script(getString(R.string.placeholder_title) + String.valueOf(i), getString(R.string.placeholder_subtitle)));
-        }
-
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setAdapter(new ScriptsRecyclerViewAdapter(scripts, new ScriptsRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Script script) {
-                Toast.makeText(getApplicationContext(), script.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }));
-        recyclerView.setHasFixedSize(true);
+        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator_layout);
+        new LoadScripts().execute();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,11 +45,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), AddScript.class);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_SCRIPT_REQUEST);
             }
         });
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ADD_SCRIPT_REQUEST && resultCode == RESULT_OK){
+            Script script = data.getParcelableExtra(Script.KEY);
+            Snackbar.make(
+                    coordinatorLayout,
+                    getString(R.string.script_saved),
+                    Snackbar.LENGTH_SHORT
+            ).show();
+            new LoadScripts().execute();
+        }
     }
 
     @Override
@@ -77,5 +86,84 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public class LoadScripts extends AsyncTask<Void, Void, List<Script>>{
+
+        @Override
+        protected List<Script> doInBackground(Void... params) {
+
+            List<Script> scripts = new ArrayList<>();
+
+            Cursor cursor = getContentResolver().query(
+                    ScriptsProvider.SCRIPT_PROVIDER_URI,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+
+            if(cursor != null){
+                if(cursor.moveToFirst()){
+                    do {
+                        scripts.add(new Script(
+                                cursor.getLong(ScriptsProvider.ID_INDEX),
+                                cursor.getString(ScriptsProvider.FILENAME_INDEX),
+                                cursor.getString(ScriptsProvider.CONTENT_INDEX)
+                        ));
+                    } while(cursor.moveToNext());
+                }
+            }
+            return scripts;
+        }
+
+        @Override
+        protected void onPostExecute(List<Script> scripts) {
+            super.onPostExecute(scripts);
+            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            recyclerView.setAdapter(new ScriptsRecyclerViewAdapter(
+                    scripts,
+                    new ScriptsRecyclerViewAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Script script) {
+                            Toast.makeText(getApplicationContext(), script.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    },
+
+                    new ScriptsRecyclerViewAdapter.OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(final Script script) {
+
+                            Snackbar.make(
+                                    coordinatorLayout,
+                                    getString(R.string.question_delete_script),
+                                    Snackbar.LENGTH_LONG
+                            ).setAction(getString(R.string.delete), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    getContentResolver().delete(
+                                            ScriptsProvider.SCRIPT_PROVIDER_URI,
+                                            null,
+                                            new String[]{
+                                                    null,
+                                                    script.getFileName(),
+                                                    null
+                                            }
+                                    );
+                                    Snackbar.make(
+                                            coordinatorLayout,
+                                            getString(R.string.script_deleted),
+                                            Snackbar.LENGTH_SHORT
+                                    ).show();
+                                    new LoadScripts().execute();
+                                }
+                            }).show();
+                            return true;
+                        }
+                    }
+            ));
+        }
     }
 }
