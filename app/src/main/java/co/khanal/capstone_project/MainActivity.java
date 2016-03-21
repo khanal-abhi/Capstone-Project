@@ -1,16 +1,12 @@
 package co.khanal.capstone_project;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ScrollingTabContainerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(new ScriptsRecyclerViewAdapter(scripts, new ScriptsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Script script) {
-                Toast.makeText(getApplicationContext(), script.getFileName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), script.toString(), Toast.LENGTH_SHORT).show();
             }
         }));
         recyclerView.setHasFixedSize(true);
@@ -52,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Intent intent = new Intent(getApplicationContext(), AddScript.class);
+                startActivity(intent);
             }
         });
 
@@ -76,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+
         }
 
         return super.onOptionsItemSelected(item);

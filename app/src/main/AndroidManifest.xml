@@ -25,7 +25,17 @@
             android:name=".ScriptsProvider"
             android:authorities="co.khanal.capstone_project.scripts"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true" />
+
+        <activity
+            android:name=".AddScript"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.khanal.capstone_project.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
