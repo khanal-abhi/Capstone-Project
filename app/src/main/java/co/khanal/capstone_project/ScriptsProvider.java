@@ -34,6 +34,8 @@ public class ScriptsProvider extends ContentProvider {
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         // Implement this to handle requests to delete one or more rows.
+        if(selectionArgs == null)
+            return ScriptUtility.deleteAllScripts(getContext()) ? 0 : -1;
         String filename = selectionArgs[1];
         return
         ScriptUtility.deleteScript(new Script(0, filename, ""), getContext()) ? 0 : -1;

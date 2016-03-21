@@ -104,4 +104,12 @@ public class ScriptUtility {
         File file = new File((context.getFilesDir().getPath()).toString() + "/" + properFilename(script.getFileName()));
         return file.delete();
     }
+
+    public static boolean deleteAllScripts(Context context){
+        for(Script script : getScripts(context)){
+            if(!deleteScript(script, context))
+                return false;
+        }
+        return true;
+    }
 }

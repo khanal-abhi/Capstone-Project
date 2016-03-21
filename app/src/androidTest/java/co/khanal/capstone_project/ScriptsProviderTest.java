@@ -21,7 +21,7 @@ public class ScriptsProviderTest extends ApplicationTest {
     }
 
     public void tearDown() throws Exception {
-        getContext().getContentResolver().delete(uri, null, new String[]{String.valueOf(script.getId()), script.getFileName(), script.getContent()});
+        getContext().getContentResolver().delete(uri, null, null);
         if(script != null){
             script = null;
         }

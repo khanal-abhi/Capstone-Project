@@ -58,4 +58,10 @@ public class ScriptUtilityTest extends AndroidTestCase {
     public void testImproperFilename() throws Exception {
         assertEquals("hello world", ScriptUtility.improperFilename("hello_world.txt"));
     }
+
+    public void testDeleteAllScripts() throws Exception {
+        ScriptUtility.scriptToFile(script, getContext());
+        ScriptUtility.deleteAllScripts(getContext());
+        assertEquals(0, ScriptUtility.getScripts(getContext()).size());
+    }
 }
