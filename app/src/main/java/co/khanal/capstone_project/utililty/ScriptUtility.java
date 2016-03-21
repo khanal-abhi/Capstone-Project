@@ -1,14 +1,12 @@
 package co.khanal.capstone_project.utililty;
 
 import android.content.Context;
-import android.provider.MediaStore;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,17 +15,24 @@ import java.util.List;
 public class ScriptUtility {
 
 //    Static method that returns a list of all files with .txt extension in the app directory.
-    public static List<File> getFiles(Context context){
+    public static List<Script> getScripts (Context context){
         File dir = context.getFilesDir();
-        List<File> files = Arrays.asList(dir);
-        List<File> scripts = new ArrayList<>();
+        List<Script> scripts = new ArrayList<>();
+        int id = 1;
 
         for(File file : dir.listFiles()){
             if(file.isFile()){
                 if(file.toString().contains(".txt")){
-                    scripts.add(file);
+                    try {
+                        Script script = scriptFromFile(file);
+                        script.setId(id);
+                        scripts.add(script);
+                    } catch (IOException e){
+                        return null;
+                    }
                 }
             }
+            id++;
         }
         return scripts;
     }

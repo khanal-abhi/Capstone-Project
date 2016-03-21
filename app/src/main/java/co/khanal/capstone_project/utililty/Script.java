@@ -24,9 +24,10 @@ public class Script {
 
         Script script = (Script) o;
 
-        if (getId() != script.getId()) return false;
-        if (!getFileName().equals(script.getFileName())) return false;
-        return getContent().equals(script.getContent());
+        return
+                id == script.getId() &&
+                        fileName == script.getFileName() &&
+                        content == script.getContent();
 
     }
 

@@ -15,13 +15,14 @@ public class ScriptUtilityTest extends AndroidTestCase {
     public void setUp() throws Exception {
         super.setUp();
         script = new Script("hello world", "some data goes here.");
+        script.setId(1);
 
     }
 
     public void testDeleteScript() throws Exception {
         ScriptUtility.scriptToFile(script, getContext());
         ScriptUtility.deleteScript(script, getContext());
-        assertEquals(0, ScriptUtility.getFiles(getContext()).size());
+        assertEquals(0, ScriptUtility.getScripts(getContext()).size());
     }
 
     public void tearDown() throws Exception {
@@ -34,7 +35,7 @@ public class ScriptUtilityTest extends AndroidTestCase {
 
     public void testGetFiles() throws Exception {
         ScriptUtility.scriptToFile(script, getContext());
-        assertEquals(1, ScriptUtility.getFiles(getContext()).size());
+        assertEquals(1, ScriptUtility.getScripts(getContext()).size());
     }
 
     public void testScriptFromFile() throws Exception {
@@ -45,7 +46,9 @@ public class ScriptUtilityTest extends AndroidTestCase {
 
     public void testScriptToFile() throws Exception {
         ScriptUtility.scriptToFile(script, getContext());
-        assertEquals(ScriptUtility.properFilename(script.getFileName()), ScriptUtility.getFiles(getContext()).get(0).getName());
+        assertEquals(script.getContent(), ScriptUtility.getScripts(getContext()).get(0).getContent());
+        assertEquals(script.getFileName(), ScriptUtility.getScripts(getContext()).get(0).getFileName());
+        assertEquals(script.getId(), ScriptUtility.getScripts(getContext()).get(0).getId());
     }
 
     public void testProperFilename() throws Exception {
