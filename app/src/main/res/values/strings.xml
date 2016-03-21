@@ -1,7 +1,13 @@
 <resources>
-    <string name="app_name">Capstone-Project</string>
+    <string name="app_name">The Teleprompter</string>
     <string name="action_settings">Settings</string>
     
     <!-- For Admob -->
     <string name="banner_ad_unit_id">ca-app-pub-3819034797358925/1880338053</string>
+
+    <string name="ellipsis">…</string>
+
+    <!-- For placeholders-->
+    <string name="placeholder_title" translatable="false">Some Script Title</string>
+    <string name="placeholder_subtitle" translatable="false">A whole bunch of stuff goes in here. I will keep typing so that we have something to see here.</string>
 </resources>
