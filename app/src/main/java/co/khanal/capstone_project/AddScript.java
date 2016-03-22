@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -26,7 +27,6 @@ import co.khanal.capstone_project.utililty.Script;
 public class AddScript extends AppCompatActivity {
 
     Script script;
-    CoordinatorLayout coordinatorLayout;
 
     AdView banner;
 
@@ -43,16 +43,9 @@ public class AddScript extends AppCompatActivity {
 
         banner.loadAd(adRequest);
 
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Picasso.with(getApplicationContext())
-                .load(R.drawable.add_script_backdrop)
-                .placeholder(R.drawable.add_script_backdrop)
-                .error(R.drawable.backdrop)
-                .into((ImageView) findViewById(R.id.backdrop));
 
         FloatingActionButton fab = ((FloatingActionButton) findViewById(R.id.save_script));
 
@@ -85,6 +78,26 @@ public class AddScript extends AppCompatActivity {
                 }
             });
         }
+
+        final NestedScrollView scrollview = (NestedScrollView)findViewById(R.id.scroll_view);
+
+        ((TextView)findViewById(R.id.title)).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    scrollview.smoothScrollBy(0, 100);
+                }
+            }
+        });
+
+        ((TextView)findViewById(R.id.content)).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    scrollview.smoothScrollBy(0, 100);
+                }
+            }
+        });
     }
 
     @Override

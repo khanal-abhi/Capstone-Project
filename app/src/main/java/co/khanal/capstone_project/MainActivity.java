@@ -15,6 +15,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import co.khanal.capstone_project.adapters.ScriptsCursorAdapter;
 import co.khanal.capstone_project.utililty.Script;
@@ -97,6 +100,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         recyclerView.setAdapter(adapter);
 
         getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
+
+        Picasso.with(getApplicationContext())
+                .load(R.drawable.backdrop)
+                .placeholder(R.drawable.add_script_backdrop)
+                .error(R.drawable.backdrop)
+                .into((ImageView) findViewById(R.id.backdrop));
 
     }
 
