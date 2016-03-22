@@ -87,18 +87,4 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
             old.close();
         }
     }
-
-    public class NotifyingDatasetObserver extends DataSetObserver{
-        @Override
-        public void onChanged() {
-            super.onChanged();
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public void onInvalidated() {
-            super.onInvalidated();
-            notifyDataSetChanged();
-        }
-    }
 }
