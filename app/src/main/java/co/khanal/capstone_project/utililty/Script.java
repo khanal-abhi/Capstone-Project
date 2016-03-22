@@ -1,8 +1,11 @@
 package co.khanal.capstone_project.utililty;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import co.khanal.capstone_project.ScriptsProvider;
 
 /**
  * Created by abhi on 3/18/16.
@@ -116,5 +119,13 @@ public class Script implements Parcelable{
                 ", fileName='" + fileName + '\'' +
                 ", content='" + content + '\'' +
                 '}';
+    }
+
+    public static Script fromCursor(Cursor cursor){
+        return new Script(
+                cursor.getLong(ScriptsProvider.ID_INDEX),
+                cursor.getString(ScriptsProvider.FILENAME_INDEX),
+                cursor.getString(ScriptsProvider.CONTENT_INDEX)
+        );
     }
 }

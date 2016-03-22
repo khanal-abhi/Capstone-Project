@@ -260,6 +260,7 @@ public class Prompter extends AppCompatActivity {
             scriptContent.setTextColor(textColor);
             scriptContent.setBackgroundColor(color);
             scriptContent.setTextSize(fontSize);
+            ((ScrollView)findViewById(R.id.scroll_view)).setBackgroundColor(color);
         }
     }
 
