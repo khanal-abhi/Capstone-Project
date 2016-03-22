@@ -51,7 +51,6 @@ public class ScriptsProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        // TODO: Implement this to handle requests to insert a new row.
 
         String filename = values.getAsString(FILENAME);
         String content = values.getAsString(CONTENT);
@@ -67,7 +66,6 @@ public class ScriptsProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        // TODO: Implement this to initialize your content provider on startup.
         return false;
     }
 

@@ -8,30 +8,28 @@
         android:id="@+id/toggle_colors"
         android:orderInCategory="1"
         android:title="@string/toggle_colors"
-        app:showAsAction="never"/>
+        app:showAsAction="always"
+        android:icon="@drawable/ic_flip_to_back_white_48dp"/>
 
     <item
-        android:id="@+id/increase_font_size"
-        android:orderInCategory="1"
+        android:id="@+id/change_font_size"
+        android:orderInCategory="2"
         android:title="@string/increase_font_size"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/decrease_font_Size"
-        android:orderInCategory="1"
-        android:title="@string/decrease_font_size"
-        app:showAsAction="never" />
+        app:showAsAction="always"
+        android:icon="@drawable/ic_text_format_white_48dp"/>
 
     <item
         android:id="@+id/increase_scroll_rate"
-        android:orderInCategory="1"
+        android:orderInCategory="3"
         android:title="@string/increase_scroll_rate"
-        app:showAsAction="never"/>
+        app:showAsAction="always"
+        android:icon="@drawable/ic_fast_forward_white_48dp"/>
 
     <item
         android:id="@+id/decrease_scroll_rate"
-        android:orderInCategory="1"
+        android:orderInCategory="4"
         android:title="@string/decrease_scroll_rate"
-        app:showAsAction="never"/>
+        app:showAsAction="always"
+        android:icon="@drawable/ic_fast_rewind_white_48dp"/>
 
 </menu>

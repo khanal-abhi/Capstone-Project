@@ -3,12 +3,14 @@ package co.khanal.capstone_project;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +18,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +33,12 @@ public class Prompter extends AppCompatActivity {
     private boolean isFullscreen;
     Script script;
     List<View> nonFullScreenViews;
-//    float scrollRate;
+    float scrollRate;
+    float fontSize;
+    int textColor;
+    int color;
+
+    TextView scriptContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +54,12 @@ public class Prompter extends AppCompatActivity {
         setUpToolbar();
         setUpFabs();
 
-        TextView scriptContent = ((TextView) findViewById(R.id.script_content));
+        scriptContent = ((TextView) findViewById(R.id.script_content));
         if(scriptContent != null)
             scriptContent.setText(script.getContent());
+
+        loadDefaults();
+
     }
 
     @Override
@@ -61,9 +73,18 @@ public class Prompter extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id){
-            case R.id.action_settings:
-//                Intent intent = new Intent(getApplicationContext(), PrompterSettings.class);
-//                startActivity(intent);
+            case R.id.toggle_colors:
+                toggleColors();
+                break;
+            case R.id.change_font_size:
+                changeFontSize();
+                break;
+            case R.id.increase_scroll_rate:
+                increaseScrollRate();
+                break;
+            case R.id.decrease_scroll_rate:
+                decreaseScrollRate();
+                break;
         }
 
         return true;
@@ -114,11 +135,12 @@ public class Prompter extends AppCompatActivity {
     public void setUpToolbar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar != null) {
-            toolbar.setTitle(script.getFileName().toUpperCase());
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
-            if(actionBar != null)
+            if(actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setTitle("");
+            }
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -148,6 +170,72 @@ public class Prompter extends AppCompatActivity {
             script = bundle.getParcelable(Script.KEY);
         } else {
             script = null;
+        }
+    }
+
+    public void toggleColors(){
+        if(textColor == Color.BLACK){
+            textColor = Color.WHITE;
+            color = Color.BLACK;
+        } else {
+            textColor = Color.BLACK;
+            color = Color.WHITE;
+        }
+        savePreferences();
+        applyPreferences();
+    }
+
+    public void changeFontSize(){
+        fontSize += 10f;
+        if(fontSize > 120f)
+            fontSize = 40f;
+        savePreferences();
+        applyPreferences();
+    }
+
+    public void increaseScrollRate(){
+        scrollRate += .2f;
+        if(scrollRate > 4f)
+            scrollRate = 4f;
+        savePreferences();
+        applyPreferences();
+    }
+
+    public void decreaseScrollRate(){
+        scrollRate -= .1f;
+        if(scrollRate < .33f)
+            scrollRate = .33f;
+        savePreferences();
+        applyPreferences();
+    }
+
+    public void savePreferences(){
+        SharedPreferences.Editor editor = getSharedPreferences(Script.KEY, MODE_PRIVATE).edit();
+        editor.putInt(getString(R.string.text_color), textColor);
+        editor.putInt(getString(R.string.color), color);
+        editor.putFloat(getString(R.string.font_size), fontSize);
+        editor.putFloat(getString(R.string.scroll_rate), scrollRate);
+        editor.apply();
+    }
+
+
+
+    public void loadDefaults(){
+        SharedPreferences preferences = getSharedPreferences(Script.KEY, MODE_PRIVATE);
+        textColor = preferences.getInt(getString(R.string.text_color), Color.BLACK);
+        color = preferences.getInt(getString(R.string.color), Color.WHITE);
+        fontSize = preferences.getFloat(getString(R.string.font_size), 26f);
+        scrollRate = preferences.getFloat(getString(R.string.scroll_rate), 1f);
+
+        applyPreferences();
+    }
+
+    public void applyPreferences(){
+        if(scriptContent != null){
+            scriptContent.setTextColor(textColor);
+            scriptContent.setBackgroundColor(color);
+            scriptContent.setTextSize(fontSize);
+            // TODO: Apply scroll anim speed here
         }
     }
 
