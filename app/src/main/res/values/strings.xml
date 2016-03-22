@@ -18,4 +18,9 @@
     <string name="question_delete_script">Delete the script?</string>
     <string name="script_save_no_filename">Cannot add a script with no title.</string>
     <string name="script_save_no_content">Cannot add a script with no content.</string>
+    <string name="title_activity_prompter">Prompter</string>
+
+
+    <string name="endl">\n</string>
+    <string name="mime_plain">text/plain</string>
 </resources>

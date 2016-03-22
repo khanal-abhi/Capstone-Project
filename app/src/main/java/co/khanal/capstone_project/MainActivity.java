@@ -139,7 +139,10 @@ public class MainActivity extends AppCompatActivity {
                     new ScriptsRecyclerViewAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(Script script) {
-                            Toast.makeText(getApplicationContext(), script.toString(), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), Prompter.class);
+                            intent.putExtra(Script.KEY, script);
+                            startActivity(intent);
+
                         }
                     },
 
