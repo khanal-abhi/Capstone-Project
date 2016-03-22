@@ -16,6 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,13 +49,19 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(getApplicationContext(), AddScript.class);
-                    startActivityForResult(intent, ADD_SCRIPT_REQUEST);
+                   loadAddScript();
+
                 }
             });
 
 
     }
+
+    public void loadAddScript(){
+        Intent intent = new Intent(getApplicationContext(), AddScript.class);
+        startActivityForResult(intent, ADD_SCRIPT_REQUEST);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

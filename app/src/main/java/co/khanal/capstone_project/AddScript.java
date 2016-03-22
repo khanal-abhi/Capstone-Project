@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.squareup.picasso.Picasso;
 
 import co.khanal.capstone_project.utililty.Script;
@@ -26,13 +28,22 @@ public class AddScript extends AppCompatActivity {
     Script script;
     CoordinatorLayout coordinatorLayout;
 
+    AdView banner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator_layout);
-
         setContentView(R.layout.activity_add_script);
+
+        banner = (AdView)findViewById(R.id.banner_ad);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("41dabf86")
+                .build();
+
+        banner.loadAd(adRequest);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getActionBar() != null)
