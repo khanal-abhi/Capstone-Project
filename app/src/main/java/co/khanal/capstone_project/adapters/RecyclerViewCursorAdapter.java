@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import co.khanal.capstone_project.ScriptsProvider;
 
 /**
- * Created by abhi on 3/22/16.
+ * Created by abhi on 3/22/16
+ * Referenced ths gist https://gist.github.com/skyfishjy/443b7448f59be978bc59 for this implementation
+ * thanks to skyfishjy
  */
 public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>{
 
@@ -35,7 +37,7 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
 
     @Override
     public long getItemId(int position) {
-        if(cursor != null && cursor.moveToPosition(position)){
+        if(cursor != null && cursor.moveToPosition(position)) {
             return cursor.getLong(ScriptsProvider.ID_INDEX);
         }
         return 0;
