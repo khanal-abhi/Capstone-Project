@@ -24,4 +24,26 @@
 
     <string name="endl">\n</string>
     <string name="mime_plain">text/plain</string>
+
+    <!-- Strings related to Settings -->
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_pormpter_settings">Prompter Settings</string>
+
+    <string name="text_color">Text Color:</string>
+    <string name="color">Background Color:</string>
+    <string name="font_size">Font Size:</string>
+    <string name="scroll_rate">Scroll Rate:</string>
+
+
+
 </resources>

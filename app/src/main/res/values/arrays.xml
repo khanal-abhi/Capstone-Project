@@ -22,12 +22,45 @@
     </array>
 
     <array name="rate">
+        <item>.33f</item>
         <item>.5f</item>
+        <item>.67f</item>
         <item>1f</item>
         <item>2f</item>
-        <item>4f</item>
-        <item>6f</item>
-        <item>8f</item>
+        <item>3f</item>
+    </array>
+
+
+    <!-- String arrays for spinners -->
+
+    <array name="selection_colors_string">
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Black</item>
+        <item>White</item>
+    </array>
+
+    <array name="sizes_string">
+        <item>Smallest</item>
+        <item>Smaller</item>
+        <item>Small</item>
+        <item>Mid</item>
+        <item>Large</item>
+        <item>Larger</item>
+        <item>Largest</item>
+        <item>Extra Large</item>
+
+    </array>
+
+    <array name="rate_string">
+        <item>Third</item>
+        <item>Half</item>
+        <item>Two Thirds</item>
+        <item>Full</item>
+        <item>Double</item>
+        <item>Triple</item>
     </array>
 
 </resources>

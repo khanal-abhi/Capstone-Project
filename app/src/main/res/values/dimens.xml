@@ -7,12 +7,12 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="card_view_margin">2dp</dimen>
 
-    <dimen name="smallest">24sp</dimen>
-    <dimen name="smaller">34sp</dimen>
-    <dimen name="small">44sp</dimen>
-    <dimen name="mid">54sp</dimen>
-    <dimen name="large">64sp</dimen>
-    <dimen name="larger">74sp</dimen>
-    <dimen name="largest">84sp</dimen>
-    <dimen name="extra_large">94sp</dimen>
+    <dimen name="smallest">10sp</dimen>
+    <dimen name="smaller">14sp</dimen>
+    <dimen name="small">18sp</dimen>
+    <dimen name="mid">22sp</dimen>
+    <dimen name="large">26sp</dimen>
+    <dimen name="larger">30sp</dimen>
+    <dimen name="largest">34sp</dimen>
+    <dimen name="extra_large">38sp</dimen>
 </resources>
