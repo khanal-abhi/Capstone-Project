@@ -45,15 +45,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="co.khanal.capstone_project.MainActivity" />
         </activity>
-        <activity
-            android:name=".PrompterSettings"
-            android:label="@string/title_activity_pormpter_settings"
-            android:parentActivityName=".Prompter"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.khanal.capstone_project.Prompter" />
-        </activity>
     </application>
 
 </manifest>

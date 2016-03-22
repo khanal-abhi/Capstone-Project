@@ -44,6 +44,22 @@
     <string name="font_size">Font Size:</string>
     <string name="scroll_rate">Scroll Rate:</string>
 
+    <string name="toggle_colors">Toggle colors</string>
+    <string name="increase_font_size">Font Size +</string>
+    <string name="decrease_font_size">Font Size -</string>
+    <string name="increase_scroll_rate">Scroll Rate +</string>
+    <string name="decrease_scroll_rate">Scroll Rate -</string>
+
+
+    <!-- Content descriptions for accessibility -->
+    <string name="new_script_description">Create a new script.</string>
+    <string name="save_script_description">Save the script.</string>
+    <string name="ad_mob_description">Advertisement</string>
+    <string name="script_title_label">Script title</string>
+    <string name="script_title_input">Script title input</string>
+    <string name="script_content_label">Script content</string>
+    <string name="script_content_input">Script content input</string>
+    <string name="empty_space">Empty Space</string>
 
 
 </resources>

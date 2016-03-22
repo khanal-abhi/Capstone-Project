@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id"/>
+            ads:adUnitId="@string/banner_ad_unit_id"
+            android:contentDescription="@string/ad_mob_description"/>
 
         <RelativeLayout
             android:layout_below="@id/banner_ad"
@@ -32,17 +33,20 @@
                 android:text="@string/placeholder_title"
                 style="@style/script_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/script_title_label"/>
 
             <EditText
                 android:layout_below="@id/title_label"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/script_title_input"/>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/text_margin" />
+                android:layout_height="@dimen/text_margin"
+                android:contentDescription="@string/empty_space"/>
 
             <TextView
                 android:id="@+id/content_label"
@@ -50,13 +54,15 @@
                 android:text="@string/placeholder_subtitle"
                 style="@style/script_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/script_content_label"/>
 
             <EditText
                 android:layout_below="@id/content_label"
                 android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/script_content_input"/>
 
 
         </RelativeLayout>

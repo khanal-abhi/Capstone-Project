@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,6 +17,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.prefs.PreferenceChangeEvent;
 import java.util.prefs.PreferenceChangeListener;
 
@@ -25,89 +28,31 @@ public class Prompter extends AppCompatActivity {
 
     private boolean isFullscreen;
     Script script;
+    List<View> nonFullScreenViews;
+//    float scrollRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prompter);
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
-            script = bundle.getParcelable(Script.KEY);
-        } else {
-            script = null;
-        }
-
-        SharedPreferences preferences = getSharedPreferences(Script.KEY, MODE_PRIVATE);
-
-        final TypedArray colors = getResources().obtainTypedArray(R.array.selection_colors);
-        final TypedArray sizes = getResources().obtainTypedArray(R.array.sizes);
-        final TypedArray rates = getResources().obtainTypedArray(R.array.rate);
-
-        int textColorInt = preferences.getInt(getString(R.string.text_color), 5);
-        int colorInt = preferences.getInt(getString(R.string.color), 4);
-        int fontSizeInt = preferences.getInt(getString(R.string.font_size), 0);
-        int scrollRateInt = preferences.getInt(getString(R.string.scroll_rate), 0);
-
-        final TextView scriptContent = (TextView)findViewById(R.id.script);
-
         isFullscreen = false;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(script.getFileName().toUpperCase());
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        scriptContent.setText(script.getContent());
-        scriptContent.setTextSize(sizes.getDimensionPixelSize(fontSizeInt, 0));
-        scriptContent.setBackgroundColor(colors.getColor(colorInt, 4));
-        scriptContent.setTextColor(colors.getColor(textColorInt, 5));
+        nonFullScreenViews = new ArrayList<>();
 
-        preferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                scriptContent.setTextColor(colors.getColor(sharedPreferences.getInt(getString(R.string.text_color), 5), 5));
-                scriptContent.setBackgroundColor(colors.getColor(sharedPreferences.getInt(getString(R.string.color), 4), 4));
-                scriptContent.setTextSize(sizes.getDimensionPixelSize(sharedPreferences.getInt(getString(R.string.font_size), 0), 0));
-                // TODO: add the scroll implementation\
-            }
-        });
+        Bundle bundle = getIntent().getExtras();
+        loadScript(bundle);
 
-        colors.recycle();
-        sizes.recycle();
-        rates.recycle();
+        setUpToolbar();
+        setUpFabs();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_play);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isFullscreen = true;
-                findViewById(R.id.fab_play).setVisibility(View.GONE);
-                findViewById(R.id.fab_share).setVisibility(View.GONE);
-                findViewById(R.id.toolbar).setVisibility(View.GONE);
-            }
-        });
-
-        FloatingActionButton fabShare = (FloatingActionButton)findViewById(R.id.fab_share);
-        fabShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, script.getFileName() + getString(R.string.endl) + script.getContent());
-                intent.setType(getString(R.string.mime_plain));
-                startActivity(intent);
-            }
-        });
+        TextView scriptContent = ((TextView) findViewById(R.id.script_content));
+        if(scriptContent != null)
+            scriptContent.setText(script.getContent());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_settings, menu);
+        getMenuInflater().inflate(R.menu.menu_prompter, menu);
         return true;
     }
 
@@ -117,8 +62,8 @@ public class Prompter extends AppCompatActivity {
 
         switch (id){
             case R.id.action_settings:
-                Intent intent = new Intent(getApplicationContext(), PrompterSettings.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), PrompterSettings.class);
+//                startActivity(intent);
         }
 
         return true;
@@ -128,12 +73,81 @@ public class Prompter extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(isFullscreen){
-            isFullscreen = false;
-            findViewById(R.id.fab_play).setVisibility(View.VISIBLE);
-            findViewById(R.id.fab_share).setVisibility(View.VISIBLE);
-            findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+            returnFromFullScreen();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    public void goFullScreen(){
+        for(View view : nonFullScreenViews){
+            view.setVisibility(View.GONE);
+        }
+        isFullscreen = true;
+    }
+
+    public void returnFromFullScreen(){
+        for(View view : nonFullScreenViews){
+            view.setVisibility(View.VISIBLE);
+        }
+        isFullscreen = false;
+    }
+
+    View.OnClickListener fabShare = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_TEXT, script.getFileName() + getString(R.string.endl) + script.getContent());
+            intent.setType(getString(R.string.mime_plain));
+            startActivity(intent);
+        }
+    };
+
+    View.OnClickListener fabPlay = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            goFullScreen();
+        }
+    };
+
+    public void setUpToolbar(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null) {
+            toolbar.setTitle(script.getFileName().toUpperCase());
+            setSupportActionBar(toolbar);
+            ActionBar actionBar = getSupportActionBar();
+            if(actionBar != null)
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+            nonFullScreenViews.add(toolbar);
+        }
+
+    }
+
+    public void setUpFabs(){
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_play);
+        if(fab != null)
+            fab.setOnClickListener(this.fabPlay);
+
+        FloatingActionButton fabShare = (FloatingActionButton)findViewById(R.id.fab_share);
+        if(fabShare != null)
+            fabShare.setOnClickListener(this.fabShare);
+
+        nonFullScreenViews.add(fab);
+        nonFullScreenViews.add(fabShare);
+    }
+
+    public void loadScript(Bundle bundle){
+        if(bundle != null){
+            script = bundle.getParcelable(Script.KEY);
+        } else {
+            script = null;
         }
     }
 

@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_prompter">
 
     <TextView
-        android:id="@+id/script"
+        android:id="@+id/script_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="co.khanal.capstone_project.Prompter">
+
+    <item
+        android:id="@+id/toggle_colors"
+        android:orderInCategory="1"
+        android:title="@string/toggle_colors"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/increase_font_size"
+        android:orderInCategory="1"
+        android:title="@string/increase_font_size"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/decrease_font_Size"
+        android:orderInCategory="1"
+        android:title="@string/decrease_font_size"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/increase_scroll_rate"
+        android:orderInCategory="1"
+        android:title="@string/increase_scroll_rate"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/decrease_scroll_rate"
+        android:orderInCategory="1"
+        android:title="@string/decrease_scroll_rate"
+        app:showAsAction="never"/>
+
+</menu>
