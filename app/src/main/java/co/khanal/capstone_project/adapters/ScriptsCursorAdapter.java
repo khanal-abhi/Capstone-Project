@@ -15,10 +15,10 @@ import co.khanal.capstone_project.utililty.Script;
 /**
  * Created by abhi on 3/22/16.
  */
-public class ScriptsCursorAdapter extends RecyclerViewCursorAdapter<ScriptsRecyclerViewAdapter.ScriptViewHolder> {
+public class ScriptsCursorAdapter extends RecyclerViewCursorAdapter<ScriptsCursorAdapter.ScriptViewHolder> {
 
-    OnItemClickListener clickListener;
-    OnItemLongClickListener longClickListener;
+    ScriptsCursorAdapter.OnItemClickListener clickListener;
+    ScriptsCursorAdapter.OnItemLongClickListener longClickListener;
 
     public ScriptsCursorAdapter(Context context, Cursor cursor, OnItemClickListener itemClickListener,
                                 OnItemLongClickListener onItemLongClickListener) {
@@ -28,16 +28,15 @@ public class ScriptsCursorAdapter extends RecyclerViewCursorAdapter<ScriptsRecyc
     }
 
     @Override
-    public void onBindViewHolder(ScriptsRecyclerViewAdapter.ScriptViewHolder viewHolder, Cursor cursor) {
+    public void onBindViewHolder(ScriptsCursorAdapter.ScriptViewHolder viewHolder, Cursor cursor) {
         Script script = Script.fromCursor(cursor);
-        viewHolder.title.setText(script.getFileName());
-        viewHolder.subtitle.setText(script.getContent());
+        viewHolder.bind(script, clickListener, longClickListener);
     }
 
     @Override
-    public ScriptsRecyclerViewAdapter.ScriptViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ScriptsCursorAdapter.ScriptViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.script_card_view, parent, false);
-        return new ScriptsRecyclerViewAdapter.ScriptViewHolder(view);
+        return new ScriptsCursorAdapter.ScriptViewHolder(view);
     }
 
 
@@ -54,7 +53,7 @@ public class ScriptsCursorAdapter extends RecyclerViewCursorAdapter<ScriptsRecyc
             scriptCard = (CardView)itemView.findViewById(R.id.script_card);
         }
 
-        public void bind(final Script script, final OnItemClickListener clickListener, final OnItemLongClickListener longClickListener){
+        public void bind(final Script script, final ScriptsCursorAdapter.OnItemClickListener clickListener, final ScriptsCursorAdapter.OnItemLongClickListener longClickListener){
             title.setText(script.getFileName());
             String subtitle = "";
             try {

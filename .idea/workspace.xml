@@ -53,20 +53,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="113" column="13" selection-start-line="113" selection-start-column="13" selection-end-line="113" selection-end-column="13" />
-              <folding />
+            <state vertical-scroll-proportion="0.64912283">
+              <caret line="130" column="47" selection-start-line="130" selection-start-column="47" selection-end-line="130" selection-end-column="47" />
+              <folding>
+                <element signature="e#2427#2807#0" expanded="true" />
+                <element signature="e#2806#2807#0" expanded="true" />
+                <element signature="e#2825#4379#0" expanded="true" />
+                <element signature="e#3104#3146#0" expanded="true" />
+                <element signature="e#3237#3263#0" expanded="true" />
+                <element signature="e#3265#4293#0" expanded="true" />
+                <element signature="e#4028#4062#0" expanded="true" />
+                <element signature="e#4292#4293#0" expanded="true" />
+                <element signature="e#4378#4379#0" expanded="true" />
+                <element signature="e#5077#5109#0" expanded="true" />
+                <element signature="e#7001#7076#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Prompter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Prompter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/Prompter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5906433">
+            <state vertical-scroll-proportion="0.0">
               <caret line="262" column="81" selection-start-line="262" selection-start-column="81" selection-end-line="262" selection-end-column="81" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -92,10 +104,8 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/adapters/ScriptsRecyclerViewAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-              <folding>
-                <element signature="class#ScriptViewHolder#0;class#ScriptsRecyclerViewAdapter#0" expanded="false" />
-              </folding>
+              <caret line="63" column="71" selection-start-line="63" selection-start-column="52" selection-end-line="63" selection-end-column="71" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,14 +130,14 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/adapters/ScriptsCursorAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+              <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
               <folding>
-                <element signature="class#ScriptViewHolder#0;class#ScriptsCursorAdapter#0" expanded="false" />
-                <element signature="e#2506#2556#0" expanded="true" />
-                <element signature="e#2657#2844#0" expanded="true" />
-                <element signature="e#2843#2844#0" expanded="true" />
-                <element signature="e#2891#3104#0" expanded="true" />
-                <element signature="e#3103#3104#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#2519#2569#0" expanded="true" />
+                <element signature="e#2670#2857#0" expanded="true" />
+                <element signature="e#2856#2857#0" expanded="true" />
+                <element signature="e#2904#3117#0" expanded="true" />
+                <element signature="e#3116#3117#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1810,7 +1820,6 @@
         <option value="$PROJECT_DIR$/app/src/androidTest/java/co/khanal/capstone_project/ScriptsProviderTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/adapters/ScriptsRecyclerViewAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/AddScript.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
@@ -1835,9 +1844,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/tasks/AsyncScriptLoader.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/adapters/RecyclerViewCursorAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/utililty/Script.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/adapters/ScriptsCursorAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_prompter.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/Prompter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/adapters/ScriptsCursorAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2573,7 +2583,7 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287841" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287841" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287841" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995037" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -2616,7 +2626,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="18" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2659,7 +2669,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="40" selection-start-line="59" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#2427#2807#0" expanded="true" />
+            <element signature="e#2806#2807#0" expanded="true" />
+            <element signature="e#2825#4379#0" expanded="true" />
+            <element signature="e#3104#3146#0" expanded="true" />
+            <element signature="e#3237#3263#0" expanded="true" />
+            <element signature="e#3265#4293#0" expanded="true" />
+            <element signature="e#4028#4062#0" expanded="true" />
+            <element signature="e#4292#4293#0" expanded="true" />
+            <element signature="e#4378#4379#0" expanded="true" />
+            <element signature="e#5077#5109#0" expanded="true" />
+            <element signature="e#7001#7076#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2667,9 +2689,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="class#ScriptViewHolder#0;class#ScriptsRecyclerViewAdapter#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2720,7 +2740,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#2427#2807#0" expanded="true" />
+            <element signature="e#2806#2807#0" expanded="true" />
+            <element signature="e#2825#4379#0" expanded="true" />
+            <element signature="e#3104#3146#0" expanded="true" />
+            <element signature="e#3237#3263#0" expanded="true" />
+            <element signature="e#3265#4293#0" expanded="true" />
+            <element signature="e#4028#4062#0" expanded="true" />
+            <element signature="e#4292#4293#0" expanded="true" />
+            <element signature="e#4378#4379#0" expanded="true" />
+            <element signature="e#5077#5109#0" expanded="true" />
+            <element signature="e#7001#7076#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2728,9 +2760,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="94" column="29" selection-start-line="94" selection-start-column="29" selection-end-line="94" selection-end-column="29" />
-          <folding>
-            <element signature="class#ScriptViewHolder#0;class#ScriptsRecyclerViewAdapter#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2769,7 +2799,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="48" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
-          <folding />
+          <folding>
+            <element signature="e#2427#2807#0" expanded="true" />
+            <element signature="e#2806#2807#0" expanded="true" />
+            <element signature="e#2825#4379#0" expanded="true" />
+            <element signature="e#3104#3146#0" expanded="true" />
+            <element signature="e#3237#3263#0" expanded="true" />
+            <element signature="e#3265#4293#0" expanded="true" />
+            <element signature="e#4028#4062#0" expanded="true" />
+            <element signature="e#4292#4293#0" expanded="true" />
+            <element signature="e#4378#4379#0" expanded="true" />
+            <element signature="e#5077#5109#0" expanded="true" />
+            <element signature="e#7001#7076#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3054,12 +3096,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/adapters/ScriptsRecyclerViewAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_prompter.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.2413793">
+          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/Prompter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+          <caret line="262" column="81" selection-start-line="262" selection-start-column="81" selection-end-line="262" selection-end-column="81" />
           <folding>
-            <element signature="class#ScriptViewHolder#0;class#ScriptsRecyclerViewAdapter#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3078,46 +3131,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/adapters/ScriptsRecyclerViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="71" selection-start-line="63" selection-start-column="52" selection-end-line="63" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/adapters/ScriptsCursorAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+          <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
           <folding>
-            <element signature="class#ScriptViewHolder#0;class#ScriptsCursorAdapter#0" expanded="false" />
-            <element signature="e#2506#2556#0" expanded="true" />
-            <element signature="e#2657#2844#0" expanded="true" />
-            <element signature="e#2843#2844#0" expanded="true" />
-            <element signature="e#2891#3104#0" expanded="true" />
-            <element signature="e#3103#3104#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2519#2569#0" expanded="true" />
+            <element signature="e#2670#2857#0" expanded="true" />
+            <element signature="e#2856#2857#0" expanded="true" />
+            <element signature="e#2904#3117#0" expanded="true" />
+            <element signature="e#3116#3117#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="13" selection-start-line="113" selection-start-column="13" selection-end-line="113" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_prompter.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2413793">
-          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/co/khanal/capstone_project/Prompter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5906433">
-          <caret line="262" column="81" selection-start-line="262" selection-start-column="81" selection-end-line="262" selection-end-column="81" />
+        <state vertical-scroll-proportion="0.64912283">
+          <caret line="130" column="47" selection-start-line="130" selection-start-column="47" selection-end-line="130" selection-end-column="47" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#2427#2807#0" expanded="true" />
+            <element signature="e#2806#2807#0" expanded="true" />
+            <element signature="e#2825#4379#0" expanded="true" />
+            <element signature="e#3104#3146#0" expanded="true" />
+            <element signature="e#3237#3263#0" expanded="true" />
+            <element signature="e#3265#4293#0" expanded="true" />
+            <element signature="e#4028#4062#0" expanded="true" />
+            <element signature="e#4292#4293#0" expanded="true" />
+            <element signature="e#4378#4379#0" expanded="true" />
+            <element signature="e#5077#5109#0" expanded="true" />
+            <element signature="e#7001#7076#0" expanded="false" />
           </folding>
         </state>
       </provider>
