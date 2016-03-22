@@ -25,7 +25,7 @@
             android:name=".ScriptsProvider"
             android:authorities="co.khanal.capstone_project.scripts"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".AddScript"
@@ -45,6 +45,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="co.khanal.capstone_project.MainActivity" />
         </activity>
+
+        <receiver android:name=".widgets.ScriptsWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/scripts_widget_info" />
+        </receiver>
+
+        <service android:name=".services.ScriptsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
+
     </application>
 
 </manifest>
