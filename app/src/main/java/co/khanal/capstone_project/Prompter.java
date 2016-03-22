@@ -2,30 +2,23 @@ package co.khanal.capstone_project;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.util.Pair;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.prefs.PreferenceChangeEvent;
-import java.util.prefs.PreferenceChangeListener;
 
+import co.khanal.capstone_project.tasks.ScrollTask;
 import co.khanal.capstone_project.utililty.Script;
 
 public class Prompter extends AppCompatActivity {
@@ -38,28 +31,51 @@ public class Prompter extends AppCompatActivity {
     int textColor;
     int color;
 
+    ScrollView scrollView;
     TextView scriptContent;
+    ScrollTask scrollTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prompter);
 
+        scrollView = (ScrollView)findViewById(R.id.scroll_view);
+        scrollView.setTag(this);
+        scriptContent = ((TextView) findViewById(R.id.script_content));
+
         isFullscreen = false;
         nonFullScreenViews = new ArrayList<>();
-
-        Bundle bundle = getIntent().getExtras();
-        loadScript(bundle);
-
         setUpToolbar();
         setUpFabs();
 
-        scriptContent = ((TextView) findViewById(R.id.script_content));
+        if(savedInstanceState != null){
+            loadScript(savedInstanceState);
+            scrollView.scrollTo(0, savedInstanceState.getInt(getString(R.string.scroll_y)));
+            applyPreferences();
+        } else {
+
+            Bundle bundle = getIntent().getExtras();
+            loadScript(bundle);
+            loadDefaults();
+        }
+
         if(scriptContent != null)
             scriptContent.setText(script.getContent());
 
-        loadDefaults();
 
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        script = savedInstanceState.getParcelable(Script.KEY);
+        textColor = savedInstanceState.getInt(getString(R.string.text_color));
+        color = savedInstanceState.getInt(getString(R.string.color));
+        fontSize = savedInstanceState.getFloat(getString(R.string.font_size));
+        scrollRate = savedInstanceState.getFloat(getString(R.string.scroll_rate));
+        scrollView.scrollTo(0, savedInstanceState.getInt(getString(R.string.scroll_y)));
+        applyPreferences();
     }
 
     @Override
@@ -105,6 +121,8 @@ public class Prompter extends AppCompatActivity {
             view.setVisibility(View.GONE);
         }
         isFullscreen = true;
+        scrollTask = new ScrollTask();
+        scrollTask.execute(Pair.create((View) scrollView, (int) (2 * scrollRate)));
     }
 
     public void returnFromFullScreen(){
@@ -112,6 +130,11 @@ public class Prompter extends AppCompatActivity {
             view.setVisibility(View.VISIBLE);
         }
         isFullscreen = false;
+        if(scrollTask != null){
+            scrollTask.cancel(true);
+            scrollTask = null;
+        }
+
     }
 
     View.OnClickListener fabShare = new View.OnClickListener() {
@@ -149,6 +172,8 @@ public class Prompter extends AppCompatActivity {
             });
             nonFullScreenViews.add(toolbar);
         }
+
+
 
     }
 
@@ -194,17 +219,17 @@ public class Prompter extends AppCompatActivity {
     }
 
     public void increaseScrollRate(){
-        scrollRate += .2f;
-        if(scrollRate > 4f)
-            scrollRate = 4f;
+        scrollRate *= 1.2f;
+        if(scrollRate > 6f)
+            scrollRate = 6f;
         savePreferences();
         applyPreferences();
     }
 
     public void decreaseScrollRate(){
-        scrollRate -= .1f;
-        if(scrollRate < .33f)
-            scrollRate = .33f;
+        scrollRate /= 1.2f;
+        if(scrollRate < .5f)
+            scrollRate = .5f;
         savePreferences();
         applyPreferences();
     }
@@ -235,8 +260,21 @@ public class Prompter extends AppCompatActivity {
             scriptContent.setTextColor(textColor);
             scriptContent.setBackgroundColor(color);
             scriptContent.setTextSize(fontSize);
-            // TODO: Apply scroll anim speed here
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(Script.KEY, script);
+        outState.putInt(getString(R.string.text_color), textColor);
+        outState.putInt(getString(R.string.color), color);
+        outState.putFloat(getString(R.string.font_size), fontSize);
+        outState.putFloat(getString(R.string.scroll_rate), scrollRate);
+        outState.putInt(getString(R.string.scroll_y), scrollView.getScrollY());
+        if(scrollTask != null){
+            scrollTask.cancel(true);
+            scrollTask = null;
+        }
+    }
 }

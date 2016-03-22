@@ -50,6 +50,8 @@
     <string name="increase_scroll_rate">Scroll Rate +</string>
     <string name="decrease_scroll_rate">Scroll Rate -</string>
 
+    <string name="scroll_y">scroll_y</string>
+
 
     <!-- Content descriptions for accessibility -->
     <string name="new_script_description">Create a new script.</string>
