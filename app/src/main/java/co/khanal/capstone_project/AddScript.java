@@ -46,8 +46,7 @@ public class AddScript extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getActionBar() != null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Picasso.with(getApplicationContext())
                 .load(R.drawable.add_script_backdrop)

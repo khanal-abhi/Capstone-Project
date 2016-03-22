@@ -6,10 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import co.khanal.capstone_project.utililty.Script;
 
@@ -31,11 +34,16 @@ public class Prompter extends AppCompatActivity {
         }
 
         isFullscreen = false;
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(script.getFileName());
+        toolbar.setTitle(script.getFileName().toUpperCase());
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         ((TextView)findViewById(R.id.script)).setText(script.getContent());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_play);
@@ -60,8 +68,26 @@ public class Prompter extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.action_settings:
+                // TODO: Load settings menu
+        }
+
+        return true;
+    }
+
 
     @Override
     public void onBackPressed() {

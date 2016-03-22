@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="selection_colors">
+        <item>@color/red</item>
+        <item>@color/blue</item>
+        <item>@color/yellow</item>
+        <item>@color/green</item>
+        <item>@color/black</item>
+        <item>@color/white</item>
+    </array>
+
+    <array name="sizes">
+        <item>@dimen/smallest</item>
+        <item>@dimen/smaller</item>
+        <item>@dimen/small</item>
+        <item>@dimen/mid</item>
+        <item>@dimen/large</item>
+        <item>@dimen/larger</item>
+        <item>@dimen/largest</item>
+        <item>@dimen/extra_large</item>
+
+    </array>
+
+    <array name="rate">
+        <item>.5f</item>
+        <item>1f</item>
+        <item>2f</item>
+        <item>4f</item>
+        <item>6f</item>
+        <item>8f</item>
+    </array>
+
+</resources>
