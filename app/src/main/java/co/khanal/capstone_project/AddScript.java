@@ -87,6 +87,23 @@ public class AddScript extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState != null){
+            script = savedInstanceState.getParcelable(Script.KEY);
+            ((TextView)findViewById(R.id.title)).setText(savedInstanceState.getString(getString(R.string.script_title_input)));
+            ((TextView)findViewById(R.id.content)).setText(savedInstanceState.getString(getString(R.string.script_content_input)));
+            if(savedInstanceState.getBoolean(getString(R.string.script_title_label))){
+                ((TextView)findViewById(R.id.title)).requestFocus();
+            }
+
+            if(savedInstanceState.getBoolean(getString(R.string.script_content_label))){
+                ((TextView)findViewById(R.id.content)).requestFocus();
+            }
+        }
+    }
+
     public class SaveQuery extends AsyncTask<Script, Void, Void>{
 
         @Override
@@ -102,6 +119,16 @@ public class AddScript extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-
+        String scriptTitle = ((TextView)findViewById(R.id.title)).getText().toString();
+        String scriptContent = ((TextView)findViewById(R.id.content)).getText().toString();
+        outState.putParcelable(Script.KEY, script);
+        outState.putString(getString(R.string.script_title_input), scriptTitle);
+        outState.putString(getString(R.string.script_content_input), scriptContent);
+        outState.putBoolean(getString(R.string.script_title_label), ((TextView) findViewById(R.id.title)).isFocused());
+        outState.putBoolean(getString(R.string.script_content_label), ((TextView)findViewById(R.id.content)).isFocused());
+    }
 }
