@@ -33,7 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_screen_share_white_48dp" />
+            android:src="@drawable/ic_screen_share_white_48dp"
+            android:contentDescription="@string/share_description"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_play"
@@ -42,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_play_arrow_white_48dp" />
+            android:src="@drawable/ic_play_arrow_white_48dp"
+            android:contentDescription="@string/play_description"/>
 
     </RelativeLayout>
 

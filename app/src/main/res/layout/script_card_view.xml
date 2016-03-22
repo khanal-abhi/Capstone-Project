@@ -21,7 +21,8 @@
                 style="@style/script_title"
                 android:text="@string/placeholder_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/script_title_label"/>
 
             <TextView
                 android:id="@+id/subtitle"
@@ -29,13 +30,8 @@
                 android:text="@string/placeholder_subtitle"
                 android:layout_below="@id/title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/position"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone"/>
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/script_content_label"/>
 
         </RelativeLayout>
 

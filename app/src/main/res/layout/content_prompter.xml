@@ -11,6 +11,7 @@
     <TextView
         android:id="@+id/script_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/script_content_label"/>
 
 </ScrollView>

@@ -20,7 +20,7 @@
         android:id="@+id/decrease_font_Size"
         android:orderInCategory="1"
         android:title="@string/decrease_font_size"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/increase_scroll_rate"

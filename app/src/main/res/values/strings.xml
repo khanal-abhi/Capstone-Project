@@ -61,5 +61,8 @@
     <string name="script_content_input">Script content input</string>
     <string name="empty_space">Empty Space</string>
 
+    <string name="play_description">Play the script</string>
+    <string name="share_description">Share the script</string>
+
 
 </resources>
