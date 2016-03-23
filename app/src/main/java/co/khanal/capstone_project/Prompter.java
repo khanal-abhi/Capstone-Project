@@ -2,10 +2,7 @@ package co.khanal.capstone_project;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.util.Pair;
@@ -128,6 +125,10 @@ public class Prompter extends AppCompatActivity {
 
     public void goFullScreen(){
 
+        getSupportActionBar().hide();
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         tracker.send(new HitBuilders.EventBuilder()
                 .setCategory(getString(R.string.action))
                 .setAction(getString(R.string.play_script))
@@ -143,9 +144,13 @@ public class Prompter extends AppCompatActivity {
     }
 
     public void returnFromFullScreen(){
+        getSupportActionBar().show();
         for(View view : nonFullScreenViews){
             view.setVisibility(View.VISIBLE);
         }
+
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(~View.SYSTEM_UI_FLAG_FULLSCREEN);
         isFullscreen = false;
         if(scrollTask != null){
             scrollTask.cancel(true);

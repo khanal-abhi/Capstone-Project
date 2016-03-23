@@ -6,15 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".AddScript">
+    tools:context=".AddScript"
+    app:statusBarBackground="@color/transparent">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        >
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -46,7 +46,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        android:layout_marginLeft="@dimen/card_view_margin_horizontal"
+        android:layout_marginRight="@dimen/card_view_margin_horizontal"
+        android:layout_marginTop="@dimen/card_view_margin_vertical"
+        android:layout_marginBottom="@dimen/card_view_margin_vertical"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

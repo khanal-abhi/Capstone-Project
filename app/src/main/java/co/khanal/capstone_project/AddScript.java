@@ -13,7 +13,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,44 +81,57 @@ public class AddScript extends AppCompatActivity {
             }
         });
 
+        ((TextView)findViewById(R.id.content)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId){
+                    case EditorInfo.IME_ACTION_DONE:
+                        saveScript();
+                }
+                return false;
+            }
+        });
+
         if(fab != null){
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    tracker.send(new HitBuilders.EventBuilder()
-                            .setCategory(getString(R.string.action))
-                            .setAction(getString(R.string.save_script))
-                            .setValue(1)
-                            .build());
-
-                    String filename = ((TextView) findViewById(R.id.title)).getText().toString();
-                    filename = filename.trim();
-                    String content = ((TextView) findViewById(R.id.content)).getText().toString();
-                    script = new Script(
-                            filename,
-                            content
-                    );
-                    Intent intent = new Intent();
-
-                    if (filename.length() > 0) {
-                        if (content.trim().length() > 0) {
-                            new SaveQuery().execute(script);
-                            intent.putExtra(Script.KEY, script);
-
-                            setResult(RESULT_OK, intent);
-                            finish();
-                        } else {
-                            Snackbar.make(v.getRootView().findViewById(R.id.coordinator_layout), getString(R.string.script_save_no_content), Snackbar.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Snackbar.make(v.getRootView().findViewById(R.id.coordinator_layout), getString(R.string.script_save_no_filename), Snackbar.LENGTH_SHORT).show();
-                    }
-
+                    saveScript();
                 }
             });
         }
 
+    }
+
+    public void saveScript(){
+        tracker.send(new HitBuilders.EventBuilder()
+                .setCategory(getString(R.string.action))
+                .setAction(getString(R.string.save_script))
+                .setValue(1)
+                .build());
+
+        String filename = ((TextView) findViewById(R.id.title)).getText().toString();
+        filename = filename.trim();
+        String content = ((TextView) findViewById(R.id.content)).getText().toString();
+        script = new Script(
+                filename,
+                content
+        );
+        Intent intent = new Intent();
+
+        if (filename.length() > 0) {
+            if (content.trim().length() > 0) {
+                new SaveQuery().execute(script);
+                intent.putExtra(Script.KEY, script);
+
+                setResult(RESULT_OK, intent);
+                finish();
+            } else {
+                Snackbar.make(findViewById(R.id.coordinator_layout), getString(R.string.script_save_no_content), Snackbar.LENGTH_SHORT).show();
+            }
+        } else {
+            Snackbar.make(findViewById(R.id.coordinator_layout), getString(R.string.script_save_no_filename), Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     @Override

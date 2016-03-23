@@ -42,7 +42,9 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/script_title_input"/>
+                android:contentDescription="@string/script_title_input"
+                android:nextFocusDown="@+id/content"
+                android:imeOptions="actionNext"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -60,10 +62,12 @@
 
             <EditText
                 android:layout_below="@id/content_label"
-                android:id="@+id/content"
+                android:id="@id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/script_content_input"/>
+                android:contentDescription="@string/script_content_input"
+                android:nextFocusUp="@id/title"
+                android:imeOptions="actionPrevious|actionDone"/>
 
 
         </RelativeLayout>

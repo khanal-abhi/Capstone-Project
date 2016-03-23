@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -121,11 +122,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
 
-        Picasso.with(getApplicationContext())
-                .load(R.drawable.backdrop)
-                .placeholder(R.drawable.add_script_backdrop)
-                .error(R.drawable.backdrop)
-                .into((ImageView) findViewById(R.id.backdrop));
+        try {
+            Picasso.with(getApplicationContext())
+                    .load(R.drawable.backdrop)
+                    .placeholder(R.drawable.add_script_backdrop)
+                    .error(R.drawable.backdrop)
+                    .into((ImageView) findViewById(R.id.backdrop));
+        } catch (Exception e){
+            Log.e(getClass().getSimpleName(), e.getMessage());
+        }
 
     }
 
@@ -218,5 +223,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onResume();
         tracker.setScreenName(getClass().getName());
         tracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+        adapter.changeCursor(updateCursor());
     }
 }

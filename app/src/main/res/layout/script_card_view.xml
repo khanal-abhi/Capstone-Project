@@ -9,7 +9,7 @@
         android:id="@+id/script_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/card_view_margin">
+        android:layout_margin="@dimen/card_view_margin_vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
