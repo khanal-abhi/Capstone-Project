@@ -2,7 +2,10 @@ package co.khanal.capstone_project;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.util.Pair;
@@ -14,6 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +41,14 @@ public class Prompter extends AppCompatActivity {
     TextView scriptContent;
     ScrollTask scrollTask;
 
+    Tracker tracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prompter);
+
+        tracker = ((AnalyticsApplication) getApplication()).getDefaultTracker();
 
         scrollView = (ScrollView)findViewById(R.id.scroll_view);
         scrollView.setTag(this);
@@ -117,6 +127,13 @@ public class Prompter extends AppCompatActivity {
     }
 
     public void goFullScreen(){
+
+        tracker.send(new HitBuilders.EventBuilder()
+                .setCategory(getString(R.string.action))
+                .setAction(getString(R.string.play_script))
+                .setValue(1)
+                .build());
+
         for(View view : nonFullScreenViews){
             view.setVisibility(View.GONE);
         }
@@ -140,6 +157,13 @@ public class Prompter extends AppCompatActivity {
     View.OnClickListener fabShare = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory(getString(R.string.action))
+                    .setAction(getString(R.string.share_script))
+                    .setValue(1)
+                    .build());
+
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
             intent.putExtra(Intent.EXTRA_TEXT, script.getFileName() + getString(R.string.endl) + script.getContent());
@@ -199,6 +223,13 @@ public class Prompter extends AppCompatActivity {
     }
 
     public void toggleColors(){
+
+        tracker.send(new HitBuilders.EventBuilder()
+                .setCategory(getString(R.string.action))
+                .setAction(getString(R.string.toggle_colors_action))
+                .setValue(1)
+                .build());
+
         if(textColor == Color.BLACK){
             textColor = Color.WHITE;
             color = Color.BLACK;
@@ -211,6 +242,13 @@ public class Prompter extends AppCompatActivity {
     }
 
     public void changeFontSize(){
+
+        tracker.send(new HitBuilders.EventBuilder()
+                .setCategory(getString(R.string.action))
+                .setAction(getString(R.string.change_font_size_action))
+                .setValue(1)
+                .build());
+
         fontSize += 10f;
         if(fontSize > 120f)
             fontSize = 40f;
@@ -219,6 +257,13 @@ public class Prompter extends AppCompatActivity {
     }
 
     public void increaseScrollRate(){
+
+        tracker.send(new HitBuilders.EventBuilder()
+                .setCategory(getString(R.string.action))
+                .setAction(getString(R.string.increase_scroll_rate_action))
+                .setValue(1)
+                .build());
+
         scrollRate *= 1.2f;
         if(scrollRate > 6f)
             scrollRate = 6f;
@@ -227,6 +272,13 @@ public class Prompter extends AppCompatActivity {
     }
 
     public void decreaseScrollRate(){
+
+        tracker.send(new HitBuilders.EventBuilder()
+                .setCategory(getString(R.string.action))
+                .setAction(getString(R.string.decrease_scroll_rate_action))
+                .setValue(1)
+                .build());
+
         scrollRate /= 1.2f;
         if(scrollRate < .5f)
             scrollRate = .5f;
@@ -277,5 +329,12 @@ public class Prompter extends AppCompatActivity {
             scrollTask.cancel(true);
             scrollTask = null;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tracker.setScreenName(getClass().getName());
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

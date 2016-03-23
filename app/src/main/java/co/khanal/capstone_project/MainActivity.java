@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
 
 import co.khanal.capstone_project.adapters.ScriptsCursorAdapter;
@@ -31,10 +33,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     CoordinatorLayout coordinatorLayout;
     ScriptsCursorAdapter adapter;
 
+    Tracker tracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AnalyticsApplication application = (AnalyticsApplication)getApplication();
+        tracker = application.getDefaultTracker();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -60,6 +68,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 new ScriptsCursorAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Script script) {
+
+                        tracker.send(new HitBuilders.EventBuilder()
+                                .setCategory(getString(R.string.action))
+                                .setAction(getString(R.string.load_script))
+                                .setValue(1)
+                                .build());
+
                         Intent intent = new Intent(getApplicationContext(), Prompter.class);
                         intent.putExtra(Script.KEY, script);
                         startActivity(intent);
@@ -89,6 +104,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                                         getString(R.string.script_deleted),
                                         Snackbar.LENGTH_SHORT
                                 ).show();
+                                tracker.send(new HitBuilders.EventBuilder()
+                                        .setCategory(getString(R.string.action))
+                                        .setAction(getString(R.string.delete_script))
+                                        .setValue(1)
+                                        .build());
                                 adapter.changeCursor(updateCursor());
                             }
                         }).show();
@@ -109,7 +129,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
-    public void loadAddScript(){
+    public void loadAddScript() {
+        tracker.send(new HitBuilders.EventBuilder()
+                .setCategory(getString(R.string.action))
+                .setAction(getString(R.string.add_script))
+                .setValue(1)
+                .build());
+
         Intent intent = new Intent(getApplicationContext(), AddScript.class);
         startActivityForResult(intent, ADD_SCRIPT_REQUEST);
     }
@@ -187,4 +213,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         );
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tracker.setScreenName(getClass().getName());
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 }

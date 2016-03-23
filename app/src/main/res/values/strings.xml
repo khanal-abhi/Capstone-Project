@@ -72,5 +72,21 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
 
+    <!-- Analytics tracker -->
+    <string name="action">Action</string>
+    <string name="add_script">Add Script</string>
+    <string name="save_script">Save Script</string>
+    <string name="load_script">Load Script</string>
+    <string name="delete_script">Delete Script</string>
+    <string name="click_script">Click Script</string>
+    <string name="type_title">Type Title</string>
+    <string name="type_content">Type Content</string>
+    <string name="share_script">Share Script</string>
+    <string name="play_script">Play Script</string>
+    <string name="toggle_colors_action">Toggle Colors</string>
+    <string name="change_font_size_action">Change Font Size</string>
+    <string name="increase_scroll_rate_action">Increase Scroll Rate</string>
+    <string name="decrease_scroll_rate_action">Decrease Scroll Rate</string>
+
 
 </resources>

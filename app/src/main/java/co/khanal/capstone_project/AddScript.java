@@ -20,7 +20,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import co.khanal.capstone_project.utililty.Script;
 
@@ -30,10 +34,14 @@ public class AddScript extends AppCompatActivity {
 
     AdView banner;
 
+    Tracker tracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_script);
+
+        tracker = ((AnalyticsApplication)getApplication()).getDefaultTracker();
 
         banner = (AdView)findViewById(R.id.banner_ad);
         AdRequest adRequest = new AdRequest.Builder()
@@ -49,10 +57,39 @@ public class AddScript extends AppCompatActivity {
 
         FloatingActionButton fab = ((FloatingActionButton) findViewById(R.id.save_script));
 
+        ((TextView)findViewById(R.id.title)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tracker.send(new HitBuilders.EventBuilder()
+                        .setCategory(getString(R.string.action))
+                        .setAction(getString(R.string.type_title))
+                        .setValue(1)
+                        .build());
+            }
+        });
+
+        ((TextView)findViewById(R.id.content)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tracker.send(new HitBuilders.EventBuilder()
+                        .setCategory(getString(R.string.action))
+                        .setAction(getString(R.string.type_content))
+                        .setValue(1)
+                        .build());
+            }
+        });
+
         if(fab != null){
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    tracker.send(new HitBuilders.EventBuilder()
+                            .setCategory(getString(R.string.action))
+                            .setAction(getString(R.string.save_script))
+                            .setValue(1)
+                            .build());
+
                     String filename = ((TextView) findViewById(R.id.title)).getText().toString();
                     filename = filename.trim();
                     String content = ((TextView) findViewById(R.id.content)).getText().toString();
@@ -66,6 +103,7 @@ public class AddScript extends AppCompatActivity {
                         if (content.trim().length() > 0) {
                             new SaveQuery().execute(script);
                             intent.putExtra(Script.KEY, script);
+
                             setResult(RESULT_OK, intent);
                             finish();
                         } else {
@@ -79,25 +117,6 @@ public class AddScript extends AppCompatActivity {
             });
         }
 
-        final NestedScrollView scrollview = (NestedScrollView)findViewById(R.id.scroll_view);
-
-        ((TextView)findViewById(R.id.title)).setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    scrollview.smoothScrollBy(0, 100);
-                }
-            }
-        });
-
-        ((TextView)findViewById(R.id.content)).setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    scrollview.smoothScrollBy(0, 100);
-                }
-            }
-        });
     }
 
     @Override
@@ -143,5 +162,12 @@ public class AddScript extends AppCompatActivity {
         outState.putString(getString(R.string.script_content_input), scriptContent);
         outState.putBoolean(getString(R.string.script_title_label), ((TextView) findViewById(R.id.title)).isFocused());
         outState.putBoolean(getString(R.string.script_content_label), ((TextView)findViewById(R.id.content)).isFocused());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tracker.setScreenName(getClass().getName());
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }
