@@ -1,6 +1,7 @@
 package co.khanal.capstone_project.utililty;
 
 import android.content.Context;
+import android.os.Environment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +34,25 @@ public class ScriptUtility {
                 }
             }
             id++;
+        }
+
+        if (isExternalStoageAvailable()){
+            dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+
+            for(File file : dir.listFiles()){
+                if(file.isFile()){
+                    if(file.toString().contains(".txt")){
+                        try {
+                            Script script = scriptFromFile(file);
+                            script.setId(id);
+                            scripts.add(script);
+                        } catch (IOException e){
+                            return null;
+                        }
+                    }
+                }
+                id++;
+            }
         }
         return scripts;
     }
@@ -111,5 +131,12 @@ public class ScriptUtility {
                 return false;
         }
         return true;
+    }
+
+    public static boolean isExternalStoageAvailable(){
+        if(Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()){
+            return true;
+        }
+        return false;
     }
 }
