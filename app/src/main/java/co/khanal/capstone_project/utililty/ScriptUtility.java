@@ -1,7 +1,10 @@
 package co.khanal.capstone_project.utililty;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,7 +39,7 @@ public class ScriptUtility {
             id++;
         }
 
-        if (isExternalStoageAvailable()){
+        if (isExternalStorageAvailable(context)){
             dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 
             for(File file : dir.listFiles()){
@@ -133,7 +136,12 @@ public class ScriptUtility {
         return true;
     }
 
-    public static boolean isExternalStoageAvailable(){
+    public static boolean isExternalStorageAvailable(Context context){
+
+        if(ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED)
+            return false;
+
         if(Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()){
             return true;
         }
