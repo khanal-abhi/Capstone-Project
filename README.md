@@ -78,6 +78,11 @@ Settings activity will let the user customize the following:
 The new script activity will load the Script to the Prompter 
 
 
+#### Screenshots:
+<img src="img/screenshot1.png" width="200" />
+<img src="img/screenshot2.png" width="200" />
+<img src="img/screenshot3.png" width="200" />
+
 
 
 
